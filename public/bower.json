@@ -1,0 +1,18 @@
+{
+  "name": "react-practise public resource",
+  "homepage": "https://github.com/shinyting/react-practise",
+  "description": "",
+  "main": "",
+  "moduleType": [],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "^2.2.2"
+  }
+}
