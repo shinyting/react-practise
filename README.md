@@ -22,4 +22,6 @@ this.props表示那些一旦定义，就不再改变的特性，而this.state是
 组件的生命周期分成三个状态：  
 Mounting：已插入真实DOM  
 Updating：正在被重新渲染  
-Unmounting：已移出真实DOM
+Unmounting：已移出真实DOM  
+Ajax  
+组件的数据来源，通常是通过Ajax请求从服务器获取，可以使用componentDidMount方法设置Ajax请求，等到请求成功，再用this.setState方法重新渲染UI
