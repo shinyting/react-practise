@@ -1,0 +1,30 @@
+/*common style*/
+* {
+	margin: 0;
+	padding: 0;
+}
+body {
+	color: #333;
+	font-size: 14px;
+	font-family: "helvetica neue",arial,sans-serif;
+}
+ul, li {
+	list-style: none;
+}
+img {
+	border: none;
+}
+a {
+	text-decoration: none;
+}
+
+
+.commentBox {
+	background: #eee;
+	border: 1px solid #f00;
+	height: 30px;
+	line-height: 30px;
+}
+div {
+	margin: 10px;
+}

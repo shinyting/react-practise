@@ -1,104 +1,160 @@
 ReactDOM.render(
-	<h1>hello,world</h1>, 
-	document.getElementById('container')
-);
-ReactDOM.render(
-	React.createElement('h1', null, 'this world!'),
+	<h1>Hello, world!</h1>,
+	document.getElementById("container")
+)
+
+var CommentBox = React.createClass({
+	render: function () {
+		return (
+			<div className="commentBox">
+				Hello, world! I am a CommentBox.
+			</div>
+		);
+	}
+});
+React.render(
+	<CommentBox />,
 	document.getElementById('example')
 );
 
-var CommentBox = React.createClass({
-	render: function () {
-		return (
-			<div className="commentBox">
-				hello, world! I am a CommentBox.
-			</div>
-		);
-	}
-});
+var names = ['alice', 'emily', 'kate'];
 ReactDOM.render(
-	<CommentBox />,
-	document.getElementById('content')
+	<div>
+		{
+			names.map(function (name) {
+				return <div>Hello, {name}!</div>
+			})
+		}
+	</div>,
+	document.getElementById("content")
 );
 
-var CommentBox = React.createClass({
-	displayName: 'CommentBox',
-	render: function () {
-		return (
-			React.createElement(
-				'div', 
-				{className: "commentBox"},
-				"Hello, world! I am a CommentBox again."
-			)
-		);
-	}
-});
+var arr = [
+	<h1>Hello world!</h1>,
+	<h2>React is awesome</h2>
+];
 ReactDOM.render(
-	React.createElement(CommentBox, null),
-	document.getElementById('mbox')
+	<div>{arr}</div>,
+	document.getElementById("mbox")
 );
 
-var CommentList = React.createClass({
+var HelloMessage = React.createClass({
 	render: function () {
-		return (
-			<div className='commentList'>
-				Hello, world! I am a CommentList.
-			</div>
-		);
-	}
-});
-
-var CommentForm = React.createClass({
-	render: function () {
-		return (
-			<div className='commentForm'>
-				Hello, world! I am a CommentForm.
-			</div>
-		);
-	}
-});
-
-var CommentBox = React.createClass({
-	render: function () {
-		return (
-			<div className="commentBox">
-				<h1>Comments</h1>
-				<CommentList /> 
-				<CommentForm />
-			</div>
-		);
+		return <h1>Hello {this.props.name}</h1>;
 	}
 });
 ReactDOM.render(
-	<CommentBox />,
+	<HelloMessage name="John" />,
 	document.getElementById('wrap')
 );
 
-var Comment = React.createClass({
+var NotesList = React.createClass({
 	render: function () {
 		return (
-			<div className="comment">
-				<h2 className="commentAuthor">
-					{this.props.author}
-				</h2>
-				{this.props.children}
-			</div>
-			);
+			<ol>
+				{
+					React.Children.map(this.props.children, function (child) {
+						return <li>{child}</li>;
+					})
+				}
+			</ol>
+		);
 	}
 });
+ReactDOM.render(
+	<NotesList>
+		<span>hello</span>
+	</NotesList>,
+	document.getElementById('testAttr')
+);
 
-var CommentList = React.createClass({
+
+var MyTitle = React.createClass({
+	propTypes: {
+		title: React.PropTypes.string.isRequired,
+	},
+	render: function () {
+		return <h1>{this.props.title}</h1>;
+	}
+});
+var data = 123;
+ReactDOM.render(
+	<MyTitle title={data} />,
+	document.getElementById('tloop')
+);
+
+var MyTitles = React.createClass({
+	getDefaultProps: function () {
+		return {
+			title: "Hello World"
+		};
+	},
+	render: function () {
+		return <h1> {this.props.title} </h1>;
+	}
+});
+ReactDOM.render(
+	<MyTitles />,
+	document.getElementById('mtitle')
+)
+
+var MyComponent = React.createClass({
+	handleClick: function () {
+		this.refs.myTextInput.focus();
+	},
 	render: function () {
 		return (
-			<div className="commentlist">
-				<Comment author="pete hunt">this is one comment</Comment>
-				<Comment author="Jordan Walke">this is another comment</Comment>
+			<div>
+				<input type="text" ref="myTextInput" />
+				<input type="button" value="Focus the text input" onClick={this.handleClick} />
 			</div>
 		);
 	}
 });
 ReactDOM.render(
-	<CommentList />,
-	document.getElementById('testAttr')
+	<MyComponent />,
+	document.getElementById('component')
 );
 
+var LikeButton = React.createClass({
+	getInitialState: function () {
+		return {liked: false};
+	},
+	handleClick: function (event) {
+		this.setState({liked: !this.state.liked});
+	},
+	render: function () {
+		var text = this.state.liked ? 'like' : 'haven\'t liked';
+		return (
+			<p onClick={this.handleClick}>
+				You {text} this. Click to toggle.
+			</p>
+		);
+	}
+});
+ReactDOM.render(
+	<LikeButton />,
+	document.getElementById("togglebox")
+);
+
+var Input = React.createClass({
+	getInitialState: function () {
+		return {value: 'Hello!'};
+	},
+	handleChange: function (event) {
+		this.setState({value: event.target.value});
+	},
+	render: function () {
+		var value = this.state.value;
+		return (
+			<div>
+				<input type="text" value={value} onChange={this.handleChange} />
+				<p>{value}</p>
+			</div>
+		);
+	}
+});
+ReactDOM.render(
+	<Input />,
+	document.getElementById("inputbox")
+);
